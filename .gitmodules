@@ -1,0 +1,7 @@
+[submodule "ROAM"]
+	path = ROAM
+	url = git@github.com:ExistentialRobotics/ROAM.git
+[submodule "ros_gz"]
+	path = ros_gz
+	url = git@github.com:gazebosim/ros_gz.git
+	branch = noetic
