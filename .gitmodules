@@ -5,3 +5,6 @@
 	path = ros_gz
 	url = git@github.com:gazebosim/ros_gz.git
 	branch = noetic
+[submodule "SSMI"]
+	path = SSMI
+	url = git@github.com:ExistentialRobotics/SSMI.git

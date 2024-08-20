@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="world" default="room"/>
+  <arg name="ign_args" default=""/>
+
+  <include file="$(find ros_ign_gazebo)/launch/ign_gazebo.launch">
+    <arg name="ign_args" value="-r -v 1 $(find multi_sim_init)/models/world.sdf"/>
+  </include>
+
+  <arg name="robot1_name" default="husky_1" />
+  <arg name="robot2_name" default="husky_2" />
+
+  <node name="$(arg robot1_name)_dynamic_tf_broadcaster" pkg="multi_sim_init" type="dynamic_tf.py" output="screen">
+    <param name="agent_name" value="$(arg robot1_name)" />
+  </node>
+  <node
+    pkg="ros_ign_gazebo"
+    type="create"
+    name="husky0"
+    output="screen"
+    args="-world $(arg world) -file $(find multi_sim_init)/models/husky.sdf -name husky_1 true -z 1 -y 4 -Y 3.1415926 -x -4">
+  </node>
+
+<node type="rviz" name="rviz" pkg="rviz" args="-d $(find multi_sim_init)/rviz/single.rviz"/>
+
+  <node name="$(arg robot2_name)_dynamic_tf_broadcaster" pkg="multi_sim_init" type="dynamic_tf.py" output="screen">
+    <param name="agent_name" value="$(arg robot2_name)" />
+  </node>
+  <node
+    pkg="ros_ign_gazebo"
+    type="create"
+    name="husky1"
+    output="screen"
+    args="-world $(arg world) -file $(find multi_sim_init)/models/husky.sdf -name husky_2 true -z 1 -y 1 -Y 1">
+  </node>
+</launch>

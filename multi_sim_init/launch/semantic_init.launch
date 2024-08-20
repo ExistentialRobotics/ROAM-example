@@ -1,26 +1,44 @@
 <?xml version="1.0"?>
 <launch>
-
   <arg name="world" default="room"/>
-  <arg name="ign_args" default=""/>
+  <arg name="robot_name" default="husky" />
+  <arg name="x" default="0"/>
+  <arg name="y" default="0"/>
+  <arg name="z" default="0"/>
+  <arg name="roll" default="0"/>
+  <arg name="pitch" default="0"/>
+  <arg name="yaw" default="0"/>
 
-  <include file="$(find ros_ign_gazebo)/launch/ign_gazebo.launch">
-    <arg name="ign_args" value="-r -v 1 $(find multi_sim_init)/models/world.sdf"/>
-  </include>
+  <arg name="body_frame" default="base_link"/>
+  <arg name="optic_frame" default="camera_optic"/>
 
-
-  <node
-    pkg="ros_ign_gazebo"
-    type="create"
-    name="husky0"
-    output="screen"
-    args="-world $(arg world) -file $(find multi_sim_init)/models/husky.sdf -name husky0 true -z 1 -y -1 -Y -1">
-  </node>
-  <node
-    pkg="ros_ign_gazebo"
-    type="create"
-    name="husky1"
-    output="screen"
-    args="-world $(arg world) -file $(find multi_sim_init)/models/husky.sdf -name husky1 true -z 1 -y 1 -Y 1">
-  </node>
+  <group ns = "$(arg robot_name)">
+  <!-- TF broadcaster -->
+    <node name="dynamic_tf_broadcaster" pkg="multi_sim_init" type="dynamic_tf.py" output="screen" respawn="true">
+      <param name="agent_name" value="$(arg robot_name)"/>
+    </node>
+  <!-- Spawn robot -->
+    <node
+      pkg="ros_ign_gazebo"
+      type="create"
+      name="$(anon robot_respawn)"
+      output="screen"
+      args="-world $(arg world) -file $(find multi_sim_init)/models/husky.sdf -name $(arg robot_name) 
+      -x $(arg x) -y $(arg y) -z $(arg z) -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)" />
+  <!-- Bridge between ROS and IGN Gazebo -->
+    <node pkg="ros_ign_bridge" type="parameter_bridge" name="$(anon ros_ign_bridge)" output="screen" args="
+      /world/$(arg world)/model/$(arg robot_name)/link/sensors_link/sensor/rgbd_camera/image@sensor_msgs/Image@ignition.msgs.Image 
+      /world/$(arg world)/model/$(arg robot_name)/link/sensors_link/sensor/rgbd_camera/depth_image@sensor_msgs/Image@ignition.msgs.Image 
+      /world/$(arg world)/model/$(arg robot_name)/link/sensors_link/sensor/semantic_segmentation_camera/segmentation/colored_map@sensor_msgs/Image@ignition.msgs.Image
+      /model/$(arg robot_name)/pose@geometry_msgs/PoseStamped@ignition.msgs.Pose
+      /model/$(arg robot_name)/cmd_vel@geometry_msgs/Twist@ignition.msgs.Twist " respawn = "true">
+      <remap from = "/world/$(arg world)/model/$(arg robot_name)/link/sensors_link/sensor/rgbd_camera/image" to = "image"/>
+      <remap from = "/world/$(arg world)/model/$(arg robot_name)/link/sensors_link/sensor/rgbd_camera/depth_image" to = "depth_image"/>
+      <remap from = "/world/$(arg world)/model/$(arg robot_name)/link/sensors_link/sensor/semantic_segmentation_camera/segmentation/colored_map" to = "colored_map"/>
+      <remap from = "/model/$(arg robot_name)/pose" to = "pose"/>
+      <remap from = "/model/$(arg robot_name)/cmd_vel" to = "cmd_vel"/>
+    </node>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="body2camera" 
+    args="0 0 0 -1.5708 0 -1.5708 /$(arg robot_name)/$(arg body_frame) /$(arg robot_name)/$(arg optic_frame)" respawn = "true"/>
+  </group>
 </launch>

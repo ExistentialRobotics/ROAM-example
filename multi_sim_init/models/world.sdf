@@ -148,28 +148,7 @@
         <ignition-gui>
           <property key="state" type="string">docked</property>
         </ignition-gui>
-        <topic>rgbd_camera/image</topic>
-      </plugin>
-
-      <plugin filename="ImageDisplay" name="Image Display">
-        <ignition-gui>
-          <property key="state" type="string">docked</property>
-        </ignition-gui>
-        <topic>rgbd_camera/depth_image</topic>
-      </plugin>
-
-      <plugin filename="ImageDisplay" name="Image Display">
-        <ignition-gui>
-          <property key="state" type="string">docked</property>
-        </ignition-gui>
-        <topic>semantic/colored_map</topic>
-      </plugin>
-
-      <plugin filename="ImageDisplay" name="Image Display">
-        <ignition-gui>
-          <property key="state" type="string">docked</property>
-        </ignition-gui>
-        <topic>semantic/labels_map</topic>
+        <!-- <topic>semantic/labels_map</topic> -->
       </plugin>
 
 
@@ -260,9 +239,6 @@
         </plugin>
     </include>
 
-
-
-    
     <!-- North Boundary Wall -->
     <model name="north_wall">
       <static>true</static>

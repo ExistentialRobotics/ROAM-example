@@ -117,6 +117,7 @@
                 <update_rate>10</update_rate>
                 <visualize>true</visualize>
                 <!-- <topic>rgbd_camera</topic> -->
+                <!-- use default topic to enable multi robot -->
                 <enable_metrics>true</enable_metrics>
       </sensor>
       
