@@ -8,3 +8,6 @@
 [submodule "SSMI"]
 	path = SSMI
 	url = git@github.com:ExistentialRobotics/SSMI.git
+[submodule "car_control"]
+	path = car_control
+	url = git@github.com:ExistentialRobotics/car_control.git
