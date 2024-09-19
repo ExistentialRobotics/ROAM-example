@@ -1,56 +1,51 @@
 <?xml version="1.0"?>
 <launch>
+  <!-- Following setting may result in CONFLICT, UNTESTED -->
+  <arg name="models_path" default="$(find multi_sim_init)/models"/>
+  <env name="IGN_GAZEBO_RESOURCE_PATH" value="$(arg models_path):$(optenv IGN_GAZEBO_RESOURCE_PATH '')"/>
 <!-- World -->
-  <arg name="world" default="room"/>
+  <!-- <arg name="world" default="room"/>
   <arg name="ign_args" default=""/>
   <include file="$(find ros_ign_gazebo)/launch/ign_gazebo.launch">
-    <arg name="ign_args" value="-r -v 1 $(find multi_sim_init)/models/world.sdf"/>
+    <arg name="ign_args" value="-r $(find multi_sim_init)/models/world.sdf"/>
+  </include> -->
+  <arg name = "world" default = "office"/>
+  <arg name="ign_args" default=""/>
+  <!-- remove -v 4 to stop verbose, or reduce 4-->
+  <include file="$(find ros_ign_gazebo)/launch/ign_gazebo.launch">
+    <arg name="ign_args" value="-r -v 1 $(find multi_sim_init)/models/office.sdf"/>
   </include>
 
 <!-- Rviz -->
   <node type="rviz" name="rviz" pkg="rviz" args="-d $(find multi_sim_init)/rviz/semantic_room.rviz"/>
 <!-- Robot 1 -->
   <include file="$(find multi_sim_init)/launch/semantic_init.launch">
+    <arg name = "world" value ="$(arg world)" />
     <arg name="robot_name" value="husky_1"/>
-    <arg name="x" value="0"/>
-    <arg name="y" value="2"/>
-    <arg name="z" value="1"/>
-    <arg name="yaw" value="1"/>
-  </include>
-  <include file="$(find roam_mapping)/launch/semantic_octomap_multi.launch">
-    <arg name="name" value="husky_1"/>
-  </include>
-  <include file="$(find roam_planning)/launch/planning_multi.launch">
-    <arg name="name" value="husky_1"/>
+    <arg name="x" value="35"/>
+    <arg name="y" value="6"/>
+    <arg name="z" value="0.2"/>
+    <arg name="yaw" value="0"/>
+    
+    <!-- <arg name="x" value="20"/>
+    <arg name="y" value="6"/>
+    <arg name="z" value="0.2"/>
+    <arg name="yaw" value="0"/> -->
+
+    <!-- <arg name="x" value="6"/>
+    <arg name="y" value="1"/>
+    <arg name="z" value="0.2"/>
+    <arg name="yaw" value="0"/> -->
   </include>
 
 <!-- Robot 2 -->
   <include file="$(find multi_sim_init)/launch/semantic_init.launch">
+    <arg name = "world" value ="$(arg world)" />
     <arg name="robot_name" value="husky_2"/>
-    <arg name="x" value="0"/>
-    <arg name="y" value="-2"/>
-    <arg name="z" value="1"/>
-    <arg name="yaw" value="-1"/>
-  </include>
-  <include file="$(find roam_mapping)/launch/semantic_octomap_multi.launch">
-    <arg name="name" value="husky_2"/>
-  </include>
-  <include file="$(find roam_planning)/launch/planning_multi.launch">
-    <arg name="name" value="husky_2"/>
-  </include>
-
-<!-- Robot 3 -->
-  <include file="$(find multi_sim_init)/launch/semantic_init.launch">
-    <arg name="robot_name" value="husky_3"/>
-    <arg name="x" value="-5"/>
-    <arg name="y" value="7"/>
-    <arg name="z" value="1"/>
+    <arg name="x" value="6"/>
+    <arg name="y" value="1"/>
+    <arg name="z" value="0.2"/>
     <arg name="yaw" value="0"/>
-  </include>
-  <include file="$(find roam_mapping)/launch/semantic_octomap_multi.launch">
-    <arg name="name" value="husky_3"/>
-  </include>
-  <include file="$(find roam_planning)/launch/planning_multi.launch">
-    <arg name="name" value="husky_3"/>
-  </include>
+  </include> 
+
 </launch>

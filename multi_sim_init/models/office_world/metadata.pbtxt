@@ -1,0 +1,16 @@
+model {
+  file: "model.sdf"
+  file_format {
+    version {
+      major: 1
+      minor: 8
+    }
+    name: "sdf"
+  }
+}
+name: "SemanticOffice"
+description: "Clear Path office map with semantics"
+authors {
+  name: "Tianji"
+  email: "tit006@ucsd.edu"
+}

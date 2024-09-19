@@ -11,23 +11,35 @@
 
   <arg name="body_frame" default="base_link"/>
   <arg name="optic_frame" default="camera_optic"/>
-
+  <arg name="camera_frame" default="camera_regular"/>
+  <arg name="camera_height" default="0.5"/>
+  <!-- Mapping and Planning-->
+    <include file="$(find roam_mapping)/launch/semantic_octomap_multi.launch">
+      <arg name="name" value="$(arg robot_name)"/>
+    </include>
+    <include file="$(find roam_planning)/launch/planning_multi.launch">
+      <arg name="name" value="$(arg robot_name)"/>
+    </include>
   <group ns = "$(arg robot_name)">
   <!-- TF broadcaster -->
     <node name="dynamic_tf_broadcaster" pkg="multi_sim_init" type="dynamic_tf.py" output="screen" respawn="true">
       <param name="agent_name" value="$(arg robot_name)"/>
     </node>
-    
-     <node name="power_diagram_control_node" pkg="car_control" type="power_diagram_node" output="screen">
-        <!-- remap topics  -->
+    <node pkg="tf2_ros" type="static_transform_publisher" name="camera2body" 
+    args="0 0 $(arg camera_height) 0 0 0 /$(arg robot_name)/$(arg body_frame) /$(arg robot_name)/$(arg camera_frame)" respawn = "true"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="optic2camera" 
+    args="0 0 0 -1.5708 0 -1.5708 /$(arg robot_name)/$(arg camera_frame) /$(arg robot_name)/$(arg optic_frame)" respawn = "true"/>
+
+<!-- Controller -->
         <!-- goal_pos: /planner/position_cmd -->
         <!-- ~odom if using nav_msgs::Odometry -->
         <!-- ~pose if using geometry_msgs::PoseStamped-->
         <!-- ~position_cmd of type geometry_msgs::PoseStamped-->
+    <node name="power_diagram_control_node" pkg="car_control" type="power_diagram_node" output="log">
         <rosparam file="$(find car_control)/config/power_diagram_gains.yaml" command="load"/>
-	<remap from="power_diagram_control_node/position_cmd" to="planner/position_cmd"/>
-	<remap from="power_diagram_control_node/commands" to="cmd_vel" />
-	<remap from="power_diagram_control_node/pose" to="pose"/> 
+        <remap from="power_diagram_control_node/position_cmd" to="planner/position_cmd"/>
+        <remap from="power_diagram_control_node/commands" to="cmd_vel" />
+        <remap from="power_diagram_control_node/pose" to="pose"/> 
     </node>
     
   <!-- Spawn robot -->
@@ -51,7 +63,5 @@
       <remap from = "/model/$(arg robot_name)/pose" to = "pose"/>
       <remap from = "/model/$(arg robot_name)/cmd_vel" to = "cmd_vel"/>
     </node>
-    <node pkg="tf2_ros" type="static_transform_publisher" name="body2camera" 
-    args="0 0 0 -1.5708 0 -1.5708 /$(arg robot_name)/$(arg body_frame) /$(arg robot_name)/$(arg optic_frame)" respawn = "true"/>
   </group>
 </launch>

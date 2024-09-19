@@ -1,0 +1,129 @@
+<?xml version="1.0" ?>
+<sdf version="1.8">
+<model name="office_model">
+    <static>true</static>
+    <link name = "ground"> 
+        <collision name = "base_collision">
+            <geometry>
+                <mesh>
+                    <scale>2.5 2.5 1</scale>
+                    <uri>meshes/ground.dae</uri>
+                </mesh>
+            </geometry>
+        </collision>
+        <visual name = "base_visual">
+            <geometry>
+                <mesh>
+                    <scale>2.5 2.5 1</scale>
+                    <uri>meshes/ground.dae</uri>
+                </mesh>
+            </geometry>
+        </visual>
+    </link>
+    <link name = "carpets"> 
+        <collision name = "base_collision">
+            <geometry>
+                <mesh>
+                    <scale>2.5 2.5 1</scale>
+                    <uri>meshes/carpets.dae</uri>
+                </mesh>
+            </geometry>
+        </collision>
+        <visual name = "base_visual">
+            <geometry>
+                <mesh>
+                    <scale>2.5 2.5 1</scale>
+                    <uri>meshes/carpets.dae</uri>
+                </mesh>
+            </geometry>
+            <plugin filename="ignition-gazebo-label-system" name="ignition::gazebo::systems::Label">
+                <label>1</label>
+            </plugin>
+        </visual>
+    </link>
+    <link name = "monitors"> 
+        <collision name = "base_collision">
+            <geometry>
+                <mesh>
+                    <scale>2.5 2.5 1</scale>
+                    <uri>meshes/monitors.dae</uri>
+                </mesh>
+            </geometry>
+        </collision>
+        <visual name = "base_visual">
+            <geometry>
+                <mesh>
+                    <scale>2.5 2.5 1</scale>
+                    <uri>meshes/monitors.dae</uri>
+                </mesh>
+            </geometry>
+            <plugin filename="ignition-gazebo-label-system" name="ignition::gazebo::systems::Label">
+                <label>2</label>
+            </plugin>
+        </visual>
+    </link>
+    <link name = "walls"> 
+        <collision name = "base_collision">
+            <geometry>
+                <mesh>
+                    <scale>2.5 2.5 1</scale>
+                    <uri>meshes/walls.dae</uri>
+                </mesh>
+            </geometry>
+        </collision>
+        <visual name = "base_visual">
+            <geometry>
+                <mesh>
+                    <scale>2.5 2.5 1</scale>
+                    <uri>meshes/walls.dae</uri>
+                </mesh>
+            </geometry>
+            <plugin filename="ignition-gazebo-label-system" name="ignition::gazebo::systems::Label">
+                <label>3</label>
+            </plugin>
+        </visual>
+    </link>
+    <link name = "tables"> 
+        <collision name = "base_collision">
+            <geometry>
+                <mesh>
+                    <scale>2.5 2.5 1</scale>
+                    <uri>meshes/tables.dae</uri>
+                </mesh>
+            </geometry>
+        </collision>
+        <visual name = "base_visual">
+            <geometry>
+                <mesh>
+                    <scale>2.5 2.5 1</scale>
+                    <uri>meshes/tables.dae</uri>
+                </mesh>
+            </geometry>
+            <plugin filename="ignition-gazebo-label-system" name="ignition::gazebo::systems::Label">
+                <label>4</label>
+            </plugin>
+        </visual>
+    </link>
+    <link name = "rest"> 
+        <collision name = "base_collision">
+            <geometry>
+                <mesh>
+                    <scale>2.5 2.5 1</scale>
+                    <uri>meshes/rest.dae</uri>
+                </mesh>
+            </geometry>
+        </collision>
+        <visual name = "base_visual">
+            <geometry>
+                <mesh>
+                    <scale>2.5 2.5 1</scale>
+                    <uri>meshes/rest.dae</uri>
+                </mesh>
+            </geometry>
+            <plugin filename="ignition-gazebo-label-system" name="ignition::gazebo::systems::Label">
+                <label>5</label>
+            </plugin>
+        </visual>
+    </link>
+</model>
+</sdf>
