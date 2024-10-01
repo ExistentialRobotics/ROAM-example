@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Following setting may result in CONFLICT, UNTESTED -->
+  <arg name="models_path" default="$(find multi_sim_init)/models"/>
+  <env name="IGN_GAZEBO_RESOURCE_PATH" value="$(arg models_path):$(optenv IGN_GAZEBO_RESOURCE_PATH '')"/>
+<!-- World -->
+  <arg name = "world" default = "office"/>
+
+<!-- Robot 2 -->
+  <include file="$(find multi_sim_init)/launch/semantic_init.launch">
+    <arg name = "world" value ="$(arg world)" />
+    <arg name="robot_name" value="husky_2"/>
+    <arg name="x" value="6"/>
+    <arg name="y" value="1"/>
+    <arg name="z" value="0.2"/>
+    <arg name="yaw" value="0"/>
+  </include> 
+</launch>
