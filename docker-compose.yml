@@ -1,0 +1,26 @@
+services:
+  roam_demo:
+    build: .
+    container_name: roam_demo
+    command: bash -c  "source ~/catkin_ws/devel/setup.bash && roslaunch multi_sim_init semantic_init_multi.launch"
+    # command: sh
+    entrypoint: /ros_entrypoint.sh
+    runtime: nvidia
+    environment:
+      - DISPLAY
+      - QT_X11_NO_MITSHM=1
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    network_mode: host
+    privileged: true
+    stdin_open: true 
+    tty: true
+    shm_size: '8gb'
+    deploy:
+        resources:
+            limits:
+                cpus: '8.0'
+
+# If you need visualization, make sure to run `xhost +local:docker` first.

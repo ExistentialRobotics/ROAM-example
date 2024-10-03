@@ -10,7 +10,7 @@
   <!-- remove -v 4 to stop verbose, or reduce 4-->
   <include file="$(find ros_ign_gazebo)/launch/ign_gazebo.launch">
     <!-- <arg name="ign_args" value="-r -s $(find multi_sim_init)/models/office.sdf"/> -->
-    <arg name="ign_args" value=" -v 1 $(find multi_sim_init)/models/office.sdf"/>
+    <arg name="ign_args" value=" -r -v 1 $(find multi_sim_init)/models/office.sdf"/>
   </include>
 
 <!-- Rviz -->

@@ -1,18 +1,35 @@
-# ROAM-example
-The aim of this repository is to create an multi-robot simulation as ROAM demo. In progress.
+### Introduction
+This is the demo repository of [ROAM](https://github.com/ExistentialRobotics/ROAM.git)
+### Requirements
+1. Ubuntu 20.04 and ROS Noetic
+2. Gazebo Fortress [Gazebo Fortress installation](https://gazebosim.org/docs/fortress/install_ubuntu)
+3. Othrer dependencies in submodules
 
 
-# gazebo-ignition installation
-Note that in this repository ROS Noetic and gazebo ignition Fortress are used in combination
-1. Follow this link to install ROS Noetic [ROS Noetic installation](https://wiki.ros.org/noetic/Installation/Ubuntu)
-2. Follow this link to install Gazebo Fortress [Gazebo Fortress installation](https://gazebosim.org/docs/fortress/install_ubuntu)
-
-# How to run
-```bash
-roslaunch multi_sin_init semantic_init.launch
+### Launch simulation
+Please source the workspace before running the nodes
+```
+roslaunch multi_sim_init semantic_init_multi.launch
 ```
 
-# TODO
-1. Set control topic for multi robots respectively
-2. Add Rviz configuration 
-3. Change Gazebo GUI configuration to support multi-robot simulation
+
+### Docker 
+We also provide docker image for demo, it has been tested on Ubuntu 22.04 with Nvidia GPU. You need Nvidia driver to display the simulation. Other graphics card may work but not guaranteed.
+
+In dockerfile we install package python-is-python3, which is not suggested to install on your host machine. 
+1. Build the docker image
+```
+docker compose build
+```
+2. Start container and run the demo
+```
+docker compose up
+```
+3. Open container with bash
+```
+docker compose run ssmi_demo bash
+```
+### Desired result
+If everything is set up correctly, you shold see robot exploring around like this:
+![occ](occupancy.png)
+![semantic](semantic.png)
