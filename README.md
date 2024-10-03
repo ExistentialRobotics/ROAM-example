@@ -27,7 +27,7 @@ docker compose up
 ```
 3. Open container with bash
 ```
-docker compose run ssmi_demo bash
+docker compose run roam_demo bash
 ```
 ### Desired result
 If everything is set up correctly, you shold see robot exploring around like this:
