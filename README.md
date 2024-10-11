@@ -17,6 +17,12 @@ roslaunch multi_sim_init semantic_init_multi.launch
 We also provide docker image for demo, it has been tested on Ubuntu 22.04 with Nvidia GPU. You need Nvidia driver to display the simulation. Other graphics card may work but not guaranteed.
 
 In dockerfile we install package python-is-python3, which is not suggested to install on your host machine. 
+
+0. Enable GUI in docker container
+at your host:
+```
+xhost +local:docker
+```
 1. Build the docker image
 ```
 docker compose build
