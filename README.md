@@ -14,7 +14,7 @@ roslaunch multi_sim_init semantic_init_multi.launch
 
 
 ### Docker 
-We also provide docker image for demo, it has been tested on Ubuntu 22.04 with Nvidia GPU. You need Nvidia driver to display the simulation. Other graphics card may work but not guaranteed.
+We also provide docker image for demo, it has been tested on Ubuntu 22.04. [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) is required to display the simulation. Host with other graphics card may work but not guaranteed.
 
 In dockerfile we install package python-is-python3, which is not suggested to install on your host machine. 
 

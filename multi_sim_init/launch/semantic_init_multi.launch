@@ -36,23 +36,23 @@
   </include> 
 
 <!-- Robot 3 -->
-  <include file="$(find multi_sim_init)/launch/semantic_init.launch">
+  <!-- <include file="$(find multi_sim_init)/launch/semantic_init.launch">
     <arg name = "world" value ="$(arg world)" />
     <arg name="robot_name" value="husky_3"/>
     <arg name="x" value="-20"/>
     <arg name="y" value="12"/>
     <arg name="z" value="0.2"/>
     <arg name="yaw" value="1.5"/>
-  </include> 
+  </include>  -->
 
 <!-- Robot 4 -->
-  <include file="$(find multi_sim_init)/launch/semantic_init.launch">
+  <!-- <include file="$(find multi_sim_init)/launch/semantic_init.launch">
     <arg name = "world" value ="$(arg world)" />
     <arg name="robot_name" value="husky_4"/>
     <arg name="x" value="50"/>
     <arg name="y" value="-1"/>
     <arg name="z" value="0.2"/>
     <arg name="yaw" value="-1"/>
-  </include> 
+  </include>  -->
 
 </launch>
