@@ -43,16 +43,11 @@ RUN cd /root/catkin_ws/src/ros_gz/ && \
 RUN echo "source /opt/ros/noetic/setup.bash" >> /root/.bashrc && \
     source /opt/ros/noetic/setup.bash && \
     cd /root/catkin_ws && \
-    catkin build || true
-RUN source /root/catkin_ws/devel/setup.bash 
-RUN cd /root/catkin_ws && \
-    catkin build || true
-RUN source /root/catkin_ws/devel/setup.bash 
-RUN cd /root/catkin_ws && \
-    catkin build 
+    catkin build roam_mapping && \
+    catkin build
+
 RUN source /root/catkin_ws/devel/setup.bash 
 
-RUN echo "source /root/catkin_ws/devel/setup.bash" >> /root/.bashrc
 
 RUN pip3 install scikit-image 
 ENV QT_X11_NO_MITSHM=1
